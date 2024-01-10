@@ -1,0 +1,56 @@
+name: Default Process
+description: Default Action Process For All Jobs
+
+runs: 
+  using: "composite"
+  steps:
+    - name: Setup Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Python Cache
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: /opt/hostedtoolcache/Python/
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: pip-
+
+    - name: Install Robot Dependencies
+      shell: bash
+      run: |
+        pip install -r requirements.txt
+
+        echo Instalando o Node.js
+        curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+
+        sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > ~/google-chrome-keyring.tmp && sudo mv ~/google-chrome-keyring.tmp /usr/share/keyrings/google-chrome-keyring.gpg
+        echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+        cat /etc/apt/sources.list.d/google-chrome.list
+        sudo apt update -y
+        sudo apt install -y gconf-service libasound2 libatk1.0-0 libcairo2 libcups2 libfontconfig1 libgdk-pixbuf2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libxss1 fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils
+
+        sudo apt install -y google-chrome-stable
+        wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/120.0.6099.109/linux64/chromedriver-linux64.zip
+        unzip chromedriver-linux64.zip
+        sudo mv ./chromedriver-linux64/chromedriver /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+        
+    - name: Restaurar Cache do npm
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-
+
+    - name: Instalar Dependências do Node.js
+      shell: bash
+      run: npm install
+
+    - name: Salvar Cache do npm
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}

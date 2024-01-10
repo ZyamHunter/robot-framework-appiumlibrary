@@ -1,0 +1,11 @@
+datetime==5.4
+robotframework==6.1.1
+robotframework-faker==5.0.0
+robotframework-appiumlibrary==2.0.0
+robotframework-requests==0.9.6
+robotframework-tidy==4.8.0
+robotframework-jsonlibrary==0.5
+python-dotenv==1.0.0
+datetime==5.4
+appium-python-client==3.1.1
+robotframework-screencaplibrary==1.6.0

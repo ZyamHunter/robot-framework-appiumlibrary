@@ -1,0 +1,13 @@
+{
+  "name": "testesrobotseleniumappium",
+  "version": "1.0.0",
+  "description": "Projeto criado para rodar testes automatizados de aceitação (e2e) no front-end e no back-end, utilizando as tecnologias do Robot Framework e do Appium. Os testes devem ser capazes de serem rodados localmente e na pipeline",
+  "main": "index.js",
+  "scripts": {
+    "appium": "adb kill-server && adb start-server && appium --port 4723",
+    "app": "robot -d mobile ./src/Appium/Clients/Mobile.robot"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

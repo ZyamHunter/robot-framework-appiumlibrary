@@ -1,0 +1,110 @@
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "fix/**"
+      - "release/**"
+    paths-ignore:
+      - "**/*.md"
+      - .scafflater/**
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - "**/*.md"
+      - .scafflater/**
+  workflow_dispatch:
+
+name: Standard
+
+env:
+  app_name: "testes"
+  aws_region: "us-east-1"
+  dockerfilePath: "dockerfiles/Dockerfile"
+  namespace: "robot-framework"
+  value_stream: "robot-selenium"
+  BASE_URL: ${{ vars.BASE_URL }}
+  BASE_API: ${{ vars.BASE_API }}
+
+jobs:
+  ci_web:
+    name: CI - Test Web
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Default Steps
+        uses: ./.github/actions/setup-composite
+      - name: 🧪 Run Web Robot tests
+        run: |
+          robot -d web ./src/Selenium/Clients/Index.robot
+        continue-on-error: true
+      - name: ⬆️ Upload Web Test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-report
+          path: web
+
+  ci_api:
+    name: CI - Test Api
+    if: always ()
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Default Steps
+        uses: ./.github/actions/setup-composite
+      - name: 🧪 Run Api Robot tests
+        run: |
+          robot -d api ./src/Robot/Clients/Api.robot
+        continue-on-error: true
+      - name: ⬆️ Upload Api Test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-report
+          path: api
+
+  ci_mobile:
+    name: CI - Test Mobile
+    if: always ()
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Default Steps
+        uses: ./.github/actions/setup-composite
+      - name: 🧪 Run Mobile Robot tests
+        run:
+          # robot -d mobile ./src/Apium/Clients/Test.robot
+          echo "Rodando testes mobile"
+        continue-on-error: true
+      - name: ⬆️ Upload Mobile Test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-report
+          path: mobile
+
+  report_slack:
+    name: CI - Send Test Status to Slack
+    needs: [ci_web, ci_api, ci_mobile]
+    if: always ()
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Default Steps
+        uses: ./.github/actions/setup-composite
+      - name: ⬇️ Download Artifacts
+        uses: actions/download-artifact@v4
+      - run: ls
+      - name: 📁 Rename paths
+        run: |
+          mv web-report web
+          mv api-report api
+          mv mobile-report mobile
+      - name: 📨 Run Curl Message To Slack
+        run:
+          # robot ./Helpers/Curl_Slack.robot
+          echo "Enviando report de testes para o slack"

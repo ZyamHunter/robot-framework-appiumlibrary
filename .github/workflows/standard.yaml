@@ -40,7 +40,7 @@ jobs:
         uses: ./.github/actions/setup-composite
       - name: 🧪 Run Mobile Robot tests
         run:
-          # robot -d mobile ./src/Apium/Clients/Test.robot
+          robot -d mobile ./src/Apium/Clients/Test.robot
           echo "Rodando testes mobile"
         continue-on-error: true
       - name: ⬆️ Upload Mobile Test results

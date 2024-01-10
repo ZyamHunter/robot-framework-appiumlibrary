@@ -1,4 +1,4 @@
-[![Standard](https://github.com/ZyamHunter/TestesRobotSeleniumAppium/actions/workflows/standard.yaml/badge.svg)](https://github.com/ZyamHunter/TestesRobotSeleniumAppium/actions/workflows/standard.yaml)
+[![Standard](https://github.com/ZyamHunter/robot-framework-appiumlibrary/actions/workflows/standard.yaml/badge.svg)](https://github.com/ZyamHunter/robot-framework-appiumlibrary/actions/workflows/standard.yaml)
 
 # Projeto de automação Robot e Appium
 Projeto criado para rodar testes automatizados de aceitação (e2e) no front-end e no back-end, utilizando as tecnologias do Robot Framework e do Appium. Os testes devem ser capazes de serem rodados localmente e na pipeline

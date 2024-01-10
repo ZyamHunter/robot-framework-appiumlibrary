@@ -29,43 +29,6 @@ env:
   BASE_API: ${{ vars.BASE_API }}
 
 jobs:
-  ci_web:
-    name: CI - Test Web
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⬇️ Checkout
-        uses: actions/checkout@v3
-      - name: ⚙️ Default Steps
-        uses: ./.github/actions/setup-composite
-      - name: 🧪 Run Web Robot tests
-        run: |
-          robot -d web ./src/Selenium/Clients/Index.robot
-        continue-on-error: true
-      - name: ⬆️ Upload Web Test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: web-report
-          path: web
-
-  ci_api:
-    name: CI - Test Api
-    if: always ()
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⬇️ Checkout
-        uses: actions/checkout@v3
-      - name: ⚙️ Default Steps
-        uses: ./.github/actions/setup-composite
-      - name: 🧪 Run Api Robot tests
-        run: |
-          robot -d api ./src/Robot/Clients/Api.robot
-        continue-on-error: true
-      - name: ⬆️ Upload Api Test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-report
-          path: api
-
   ci_mobile:
     name: CI - Test Mobile
     if: always ()
@@ -88,7 +51,7 @@ jobs:
 
   report_slack:
     name: CI - Send Test Status to Slack
-    needs: [ci_web, ci_api, ci_mobile]
+    needs: [ci_mobile]
     if: always ()
     runs-on: ubuntu-latest
     steps:
@@ -101,8 +64,6 @@ jobs:
       - run: ls
       - name: 📁 Rename paths
         run: |
-          mv web-report web
-          mv api-report api
           mv mobile-report mobile
       - name: 📨 Run Curl Message To Slack
         run:

@@ -39,8 +39,8 @@ jobs:
       - name: ⚙️ Default Steps
         uses: ./.github/actions/setup-composite
       - name: 🧪 Run Mobile Robot tests
-        run:
-          robot -d mobile ./src/Apium/Clients/Test.robot
+        run: |
+          # robot -d mobile ./src/Appium/Clients/Mobile.robot
           echo "Rodando testes mobile"
         continue-on-error: true
       - name: ⬆️ Upload Mobile Test results

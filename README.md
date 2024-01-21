@@ -9,41 +9,51 @@ Projeto criado para rodar testes automatizados de aceitação (e2e) no front-end
 
 # Configuração do Ambiente
 
-## 1. Instalar Python 3.10
+## Instalar Python 3.10
 
 Certifique-se de ter o Python 3.10 instalado em seu sistema. Você pode baixá-lo no [site oficial do Python](https://www.python.org/).
 
-## 2. Instalar Ambiente Virtual
+## Instalar Ambiente Virtual
 
 Instale a ferramenta `virtualenv` para criar ambientes virtuais de aprendizado:
 
-- pip install virtualenv
+> pip install virtualenv
 
-## 3. Criar um ambiente virtual:
-- python -m venv project-venv
+## Criar um ambiente virtual:
+> python -m venv project-venv
 
-## 4. Se você estiver usando o PowerShell e encontrar problemas para executar scripts, talvez precise alterar a política de execução temporariamente para permitir a execução de scripts:
-- Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+## Se você estiver usando o PowerShell e encontrar problemas para executar scripts, talvez precise alterar a política de execução temporariamente para permitir a execução de scripts:
+> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
-## 5. Ativar o ambiente virtual:
-- .\project-venv\Scripts\activate
+## Ativar o ambiente virtual:
+> .\project-venv\Scripts\activate
 
-## 6. Remover cache do pip
-- pip cache remove *
+## Remover cache do pip
+> pip cache remove *
 
-## 7. Rodar os testes
-- robot -d logs ./src
+## Desativar ambiente virtual
+> deactivate
 
-## 8. Desativar ambiente virtual
-- deactivate
+## Instalar dependências do Python
+Primeiro ative o ambiente virtual para evitar erros de versão com outras bibliotecas instaladas
+> pip install -r requirements.txt
 
-## 9. Instalar Node.js:
-- https://nodejs.org/en/download
- > Ao instalar, provavelmente vários pacotes adicionais serão instalados, como chocolatery, etc.
+## Instalar nvm:
+Necessário para poder mudar a versão do Node para a usada no projeto
+> https://github.com/nvm-sh/nvm/blob/master/README.md
 
-## 10. Instalar dependências do Python
-> Primeiro ative o ambiente virtual para evitar erros de versão com outras bibliotecas instaladas
-- pip install -r requirements.txt
+## Instalar Node.js:
+Ao instalar, provavelmente vários pacotes adicionais serão instalados, como chocolatery, etc.
+> https://nodejs.org/en/download
+
+## Modificar versão padrão do node para a usada no projeto:
+> nvm use
+
+## Lint do código
+> robotidy src
+
+## Rodar os testes
+> robot -d logs ./src/Appium/Clients/Mobile.robot
 
 <br/>
 
@@ -55,7 +65,6 @@ Instale a ferramenta `virtualenv` para criar ambientes virtuais de aprendizado:
 - Appium
 - Massa de Dados
 - Geração de Report
-- Report dos testes no Slack
 
 <br/>
 
@@ -82,4 +91,4 @@ Instale a ferramenta `virtualenv` para criar ambientes virtuais de aprendizado:
 > adb devices
 
 **Executar teste regressivo**
-> npm run app
+> npm run test

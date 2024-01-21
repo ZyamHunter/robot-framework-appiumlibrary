@@ -5,7 +5,8 @@ desired_caps = {
     "deviceName": "emulator-5554",
     "appPackage": "com.bankeiro.test",
     "appActivity": "com.bankeiro.test.MainActivity",
-    "automationName": "UIAutomator2"
+    "automationName": "UIAutomator2",
+    "noReset": "true"
 }
 
 # Inicia a sessão do driver do Appium

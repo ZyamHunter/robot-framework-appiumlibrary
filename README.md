@@ -2,7 +2,7 @@
 Projeto criado para rodar testes automatizados de aceitação (e2e) no front-end e no back-end, utilizando as tecnologias do Robot Framework e do Appium. Os testes devem ser capazes de serem rodados localmente e na pipeline
 
 
-# robot e appium template
+# Robot e Appium Template
 > Repositório de testes dedicados ao uso das mais variadas bibliotecas do robot framework com appium
 
 # Configuração do Ambiente
@@ -58,6 +58,15 @@ Ao instalar, provavelmente vários pacotes adicionais serão instalados, como ch
 
 ## Para verificar os drivers instalados do Appium
 > appium driver list
+
+## Para inspecionar os elementos do app
+Baixe o Appium Inspector, no projeto foi usado a versão 2023.8.4
+> https://github.com/appium/appium-inspector/releases
+
+## Configure o Appium Inspector
+As configurações para inspecionar no Android, devem ficar parecidas com essas:
+
+<img src="./documentation/inspector.png" alt="Appium Inspector Config" />
 
 ## Lint do código
 > robotidy src

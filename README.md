@@ -49,6 +49,18 @@ Ao instalar, provavelmente vários pacotes adicionais serão instalados, como ch
 ## Modificar versão padrão do node para a usada no projeto:
 > nvm use
 
+## Para instalar o Appium
+> npm i -g appium
+
+## Para verificar as dependências do appium para automação mobile
+> npm i -g appium-doctor
+
+## Instalar driver uiautomator2 para testes Android
+> appium driver install uiautomator2
+
+## Para verificar os drivers instalados do Appium
+> appium driver list
+
 ## Lint do código
 > robotidy src
 
@@ -89,6 +101,9 @@ Ao instalar, provavelmente vários pacotes adicionais serão instalados, como ch
 
 **Verificar dispositivos disponíveis no ADB**
 > adb devices
+
+**Para verificar os emuladores instalados**
+> emulator -list-avds
 
 **Executar teste regressivo**
 > npm run test

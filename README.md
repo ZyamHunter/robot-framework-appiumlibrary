@@ -114,3 +114,6 @@ As configurações para inspecionar no Android, devem ficar parecidas com essas:
 
 **Executar teste regressivo**
 > npm run test
+
+### EXTRAS
+- https://eliasnogueira.github.io/appium-workshop/

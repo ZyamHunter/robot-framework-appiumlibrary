@@ -71,9 +71,6 @@ As configurações para inspecionar no Android, devem ficar parecidas com essas:
 ## Lint do código
 > robotidy src
 
-## Rodar os testes
-> robot -d logs ./src/Appium/Clients/Mobile.robot
-
 <br/>
 
 ### ---- Diferenciais no projeto ----
@@ -117,3 +114,4 @@ As configurações para inspecionar no Android, devem ficar parecidas com essas:
 
 ### EXTRAS
 - https://eliasnogueira.github.io/appium-workshop/
+- https://serhatbolsu.github.io/robotframework-appiumlibrary/AppiumLibrary.html#Open%20Application

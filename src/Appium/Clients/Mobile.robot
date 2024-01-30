@@ -1,6 +1,7 @@
 *** Settings ***
 Resource            ../TestCases/Login.robot
 Resource            ../TestCases/Forgot_Login.robot
+Resource    ../Components/Loop.robot
 
 Test Teardown       Close Appium
 
@@ -22,11 +23,7 @@ Fogot_login_failed
     Run Keyword And Continue On Failure    CT: Recuperar login com credencial incorreta
 
 Loop
-    FOR    ${counter}    IN RANGE    1    15
-        ${STATUS}    Run Keyword And Return Status    CT: Login com senha incorreta
-        Close Appium
-        Log To Console    Contagem ${counter}, status do caso de teste: ${STATUS}
-    END
+    Loop caso de teste    CT: Login com senha incorreta    3
 
 
 *** Keywords ***
